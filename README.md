@@ -28,12 +28,19 @@ This project is designed as a lightweight personal portfolio homepage with:
 - Vanilla JavaScript
 - Google Fonts (`Inter` and `Playfair Display`)
 
+## Documentation
+
+- [VERSIONING.md](VERSIONING.md)
+- [CHANGELOG.md](CHANGELOG.md)
+
 ## Project Structure
 
 ```text
 .
-├── index.html
-└── README.md
+|-- CHANGELOG.md
+|-- VERSIONING.md
+|-- index.html
+`-- README.md
 ```
 
 ## Getting Started
