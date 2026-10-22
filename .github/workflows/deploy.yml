@@ -1,0 +1,111 @@
+
+name: Deploy SFWorks Portfolio Hub
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sfworks-hub-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy Hub to DirectAdmin
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Send authenticated deployment request
+        env:
+          DEPLOY_URL: ${{ secrets.DEPLOY_URL }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+          DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
+          REPOSITORY: ${{ github.repository }}
+          COMMIT_SHA: ${{ github.sha }}
+          BRANCH: main
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 - <<'PY'
+          import hashlib
+          import hmac
+          import json
+          import os
+          import time
+          import urllib.error
+          import urllib.request
+          import base64
+
+          url = os.environ["DEPLOY_URL"]
+          username = os.environ["DEPLOY_USER"]
+          password = os.environ["DEPLOY_PASSWORD"]
+          secret = os.environ["DEPLOY_SECRET"]
+
+          if len(secret) != 64:
+              raise SystemExit("DEPLOY_SECRET must be 64 hex characters")
+
+          body = json.dumps({
+              "repository": os.environ["REPOSITORY"],
+              "branch": os.environ["BRANCH"],
+              "commit": os.environ["COMMIT_SHA"]
+          }, separators=(",", ":")).encode("utf-8")
+
+          timestamp = str(int(time.time()))
+
+          signature = hmac.new(
+              secret.encode("utf-8"),
+              timestamp.encode("utf-8") + b"." + body,
+              hashlib.sha256
+          ).hexdigest()
+
+          credentials = base64.b64encode(
+              f"{username}:{password}".encode("utf-8")
+          ).decode("ascii")
+
+          request = urllib.request.Request(
+              url,
+              data=body,
+              method="POST",
+              headers={
+                  "Content-Type": "application/json",
+                  "Authorization": "Basic " + credentials,
+                  "X-Deploy-Timestamp": timestamp,
+                  "X-Deploy-Signature": signature,
+                  "User-Agent": "SFWorks-Hub-GitHub-Actions"
+              }
+          )
+
+          try:
+              with urllib.request.urlopen(request, timeout=170) as response:
+                  result = response.read().decode("utf-8")
+                  print("HTTP:", response.status)
+                  print("Response:", result)
+
+                  if response.status != 200:
+                      raise SystemExit("Deployment unsuccessful")
+
+                  parsed = json.loads(result)
+
+                  if parsed.get("message") not in (
+                      "Hub deployment completed",
+                      "Commit already deployed"
+                  ):
+                      raise SystemExit("Unexpected deployment response")
+
+          except urllib.error.HTTPError as error:
+              print("Deployment HTTP error:", error.code)
+              print(error.read().decode("utf-8", errors="replace"))
+              raise SystemExit(1)
+
+          except urllib.error.URLError as error:
+              print("Deployment connection failed:", error.reason)
+              raise SystemExit(1)
+          PY
