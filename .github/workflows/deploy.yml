@@ -94,11 +94,16 @@ jobs:
 
                   parsed = json.loads(result)
 
-                  if parsed.get("message") not in (
-                      "Hub deployment completed",
-                      "Commit already deployed"
+                  message = parsed.get("message", "")
+
+                  if not isinstance(message, str) or not (
+                      message.startswith("Auto-sync completed: ")
+                      or message == "Commit already deployed"
+                      or message == "Hub deployment completed"
                   ):
                       raise SystemExit("Unexpected deployment response")
+                  
+                  print("Deployment verified successfully")
 
           except urllib.error.HTTPError as error:
               print("Deployment HTTP error:", error.code)
