@@ -21,7 +21,6 @@
             background-color: var(--obsidian);
             margin: 0;
             overflow-x: hidden;
-            cursor: none;
         }
 
         /* Container Setup */
@@ -141,30 +140,6 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
-        }
-
-        /* Cursor */
-        #cursor {
-            width: 8px;
-            height: 8px;
-            background-color: white;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 100;
-            mix-blend-mode: difference;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-            display: none;
-        }
-
-        @media (min-width: 1024px) {
-            #cursor {
-                display: block;
-            }
-        }
-
-        .side-link:hover~#cursor {
-            transform: scale(8);
         }
 
         /* Typography & Content */
@@ -314,7 +289,6 @@
 
 <body>
 
-    <div id="cursor"></div>
 
     <div class="split-container">
         <div class="watermark-layer" aria-hidden="true">
@@ -327,10 +301,10 @@
             <div class="glow-aura blue-glow"></div>
             <div class="relative z-10 max-w-sm text-center">
                 <div class="mb-2">
-                    <span class="text-[10px] uppercase text-white/40 tracking-[0.6em] block">Shirin Zahra</span>
+                    <span class="text-sm uppercase text-white/60 tracking-[0.6em] block">Shirin Zahra</span>
                 </div>
                 <span
-                    class="text-[9px] uppercase blue-text letter-spacing-widest mb-4 block font-semibold tracking-[0.5em]">Junior
+                    class="text-xs uppercase blue-text letter-spacing-widest mb-4 block font-semibold tracking-[0.5em]">Junior
                     Software Developer</span>
                 <h1 class="text-3xl md:text-5xl font-light text-white tracking-tighter">
                     THE <span class="italic font-serif">Architect</span>
@@ -368,9 +342,9 @@
             <div class="glow-aura pink-glow"></div>
             <div class="relative z-10 max-w-sm text-center">
                 <div class="mb-2">
-                    <span class="text-[10px] uppercase text-white/40 tracking-[0.6em] block">Ungku Farhah</span>
+                    <span class="text-sm uppercase text-white/60 tracking-[0.6em] block">Ungku Farhah</span>
                 </div>
-                <span class="text-[9px] uppercase pink-text letter-spacing-widest mb-4 block font-semibold">IT
+                <span class="text-xs uppercase pink-text letter-spacing-widest mb-4 block font-semibold">IT
                     Undergraduate</span>
                 <h1 class="text-3xl md:text-5xl font-light text-white tracking-tighter">
                     THE <span class="italic font-serif">Scholar</span>
@@ -401,17 +375,9 @@
     <script>
         const siteVersion = "v0.1.1";
         const versionElement = document.getElementById('site-version');
-        const cursor = document.getElementById('cursor');
 
         if (versionElement) {
             versionElement.textContent = `Version ${siteVersion}`;
-        }
-
-        if (cursor) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
         }
     </script>
 </body>
