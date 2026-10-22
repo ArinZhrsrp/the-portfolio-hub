@@ -9,7 +9,7 @@ The site version is controlled from a single place:
 Inside the bottom `<script>` block, update:
 
 ```js
-const siteVersion = "v1.0.0";
+const siteVersion = "v1.0.1";
 ```
 
 ## How to update the version
@@ -21,7 +21,7 @@ const siteVersion = "v1.0.0";
 Example:
 
 ```js
-const siteVersion = "v0.1.2";
+const siteVersion = "v1.0.2";
 ```
 
 ## What changes after updating
@@ -33,6 +33,8 @@ const siteVersion = "v0.1.2";
 
 Examples:
 
-- `v0.1.1` for a small fix
-- `v0.2.0` for a feature update
-- `v1.0.0` for the first stable public release
+- `v1.0.1` for a small fix or tweak
+- `v1.1.0` for a feature update
+- `v2.0.0` for a major redesign
+
+The first stable public release was `v1.0.0`.

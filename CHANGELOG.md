@@ -9,6 +9,19 @@ the early history was not tagged with release versions.
 
 No unreleased changes yet.
 
+## [v1.0.1] - 2026-10-22
+
+### Added
+
+- Added a favicon (cat icon cropped from the watermark logo on the obsidian
+  background): `favicon.ico`, `media/favicon-32.png`, `media/favicon-512.png`
+  and `media/apple-touch-icon.png`, linked from the `<head>` of `index.html`.
+
+### Changed
+
+- Panels and call-to-action buttons now show the pointer (hand) cursor on hover.
+- Updated README and VERSIONING.md to reflect v1.0.0 and v1.0.1 changes.
+
 ## [v1.0.0] - 2026-10-22
 
 ### Added

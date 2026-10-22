@@ -1,6 +1,6 @@
 # The Portfolio Hub
 
-A static split-screen portfolio landing page built in a single `index.html` file. The page presents two identity-driven profile paths, "The Visionary" and "The Scholar", with a cinematic hover experience, a custom cursor on desktop, and a mobile-friendly stacked layout.
+A static split-screen portfolio landing page built in a single `index.html` file. The page presents two identity-driven profile paths, "The Visionary" and "The Scholar", with a cinematic hover experience, a tagline for each persona, and a mobile-friendly stacked layout.
 
 ## Overview
 
@@ -9,7 +9,7 @@ This project is designed as a lightweight personal portfolio homepage with:
 - A two-panel hero layout for showcasing two different personas or career tracks
 - Tailwind CSS via CDN for utility styling
 - Custom CSS for motion, glow effects, responsive layout shifts, and typography
-- A small JavaScript cursor effect for desktop interaction
+- A small JavaScript snippet that renders the site version in the footer
 - No build step, framework, or package installation required
 
 ## Preview Features
@@ -18,6 +18,7 @@ This project is designed as a lightweight personal portfolio homepage with:
 - Responsive mobile layout that stacks both sections vertically
 - Color-coded visual identity for each side
 - Minimal animated center divider and anchor element
+- Pointer cursor on panels and buttons, plus a custom favicon
 - Single-file setup that is easy to edit and deploy
 
 ## Tech Stack
@@ -39,7 +40,14 @@ This project is designed as a lightweight personal portfolio homepage with:
 .
 |-- CHANGELOG.md
 |-- VERSIONING.md
+|-- favicon.ico
 |-- index.html
+|-- media/
+|   |-- apple-touch-icon.png
+|   |-- favicon-32.png
+|   |-- favicon-512.png
+|   |-- watermark-Black.png
+|   `-- watermark-White.png
 `-- README.md
 ```
 
@@ -75,6 +83,7 @@ Update the text content inside the two main `<a>` sections to change:
 
 - Names
 - Titles
+- Taglines
 - Descriptions
 - Call-to-action labels
 
@@ -92,7 +101,20 @@ Edit the CSS variables near the top of the file:
 
 ### Update links
 
-The two panels currently link to `#architect` and `#scholar`. Replace those `href` values with real destination URLs when the portfolio pages are ready.
+The two panels link to their live portfolio sites:
+
+- The Visionary (Shirin Zahra): `https://shirinzahra-portfolio.sfworks.top`
+- The Scholar (Ungku Farhah): `https://ungkufarhah-portfolio.sfworks.top`
+
+Change the `href` values on the two `<a class="side-link">` elements to point somewhere else.
+
+### Update the favicon
+
+Replace `favicon.ico` and the files in `media/` (`favicon-32.png`, `favicon-512.png`, `apple-touch-icon.png`). Browsers cache favicons heavily, so hard refresh to see changes.
+
+### Update the version
+
+See [VERSIONING.md](VERSIONING.md).
 
 ### Adjust interaction behavior
 
@@ -107,10 +129,9 @@ This project can be deployed on any static hosting platform, including:
 - Vercel
 - Cloudflare Pages
 
-Since there is no build process, deployment is as simple as uploading `index.html`.
+Since there is no build process, deployment is as simple as uploading `index.html` together with `favicon.ico` and the `media/` folder.
 
 ## Notes
 
 - The page uses external CDNs for Tailwind CSS and Google Fonts, so an internet connection is needed for those assets to load.
-- The custom cursor is shown on larger screens only.
-- Current panel links are placeholders and should be replaced with real portfolio destinations.
+- On mobile, each panel grows with its content so the buttons are never cut off by the footer.
