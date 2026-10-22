@@ -1,6 +1,6 @@
 # The Portfolio Hub
 
-A static split-screen portfolio landing page built in a single `index.html` file. The page presents two identity-driven profile paths, "The Architect" and "The Scholar", with a cinematic hover experience, a custom cursor on desktop, and a mobile-friendly stacked layout.
+A static split-screen portfolio landing page built in a single `index.html` file. The page presents two identity-driven profile paths, "The Visionary" and "The Scholar", with a cinematic hover experience, a custom cursor on desktop, and a mobile-friendly stacked layout.
 
 ## Overview
 

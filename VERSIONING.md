@@ -9,7 +9,7 @@ The site version is controlled from a single place:
 Inside the bottom `<script>` block, update:
 
 ```js
-const siteVersion = "v0.1.1";
+const siteVersion = "v1.0.0";
 ```
 
 ## How to update the version
